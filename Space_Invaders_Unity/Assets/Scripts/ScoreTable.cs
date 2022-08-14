@@ -9,7 +9,8 @@ public class ScoreTable : MonoBehaviour
     private Transform entryContainer;
     private Transform entryTemplate;
 
-    //void Start()
+    public TextMeshProUGUI Games_count;
+
     private void Awake()
     {
         entryContainer = transform.Find("ScoreEntryContainer");
@@ -38,8 +39,19 @@ public class ScoreTable : MonoBehaviour
                 case 3: rankString = "3RD"; break;
             }
             entryTransform.Find("Text_Pos").GetComponent<TextMeshProUGUI>().text = rankString;
-           // entryTransform.Find("Text_test").GetComponent<Text>().text = rankString;          
+            // entryTransform.Find("Text_test").GetComponent<Text>().text = rankString;    
+
+            int score = Random.Range(0, 10000);
+            entryTransform.Find("Text_Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
+
+            string name = "AAA";
+            entryTransform.Find("Text_Name").GetComponent<TextMeshProUGUI>().text = name;
         }
+
+        
+        int gamesCounter = Random.Range(0, 10000);
+        Games_count.text = gamesCounter.ToString();
+        //PlayerPrefs.SetInt("Games_count", number);
     }
 
     /*
