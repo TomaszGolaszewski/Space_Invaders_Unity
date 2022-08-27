@@ -99,7 +99,6 @@ public class Invaders : MonoBehaviour
         // the screen
         foreach (Transform invader in this.transform)
         {
-            Debug.Log("0");
             // Skip any invaders that have been killed
             if (!invader.gameObject.activeInHierarchy) 
             {

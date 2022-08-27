@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 1945282641}
   - component: {fileID: 1945282643}
   - component: {fileID: 1945282640}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aa15ef7c3ee2e734bb332dce7b9bcd4b, type: 3}
-  m_Color: {r: 0.092196584, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -501,3 +501,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  laserPrefab: {fileID: 759014898556432935, guid: 9108e0efd6723b34aa3ae59a6d96c16b, type: 3}
