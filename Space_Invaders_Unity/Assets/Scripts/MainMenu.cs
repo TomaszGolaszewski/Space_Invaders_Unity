@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Stats : MonoBehaviour
 {
+    /*
     public int no_of_games;
     public int[] table_of_scores;
 
@@ -33,6 +34,7 @@ public class Stats : MonoBehaviour
         no_of_games = 0;
         for (int i = 0; i < 10; i++) table_of_scores[i] = 0;
     }
+    */
 }
 
 public class MainMenu : MonoBehaviour
