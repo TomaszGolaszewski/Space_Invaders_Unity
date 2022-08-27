@@ -6,17 +6,17 @@ public class Invaders : MonoBehaviour
     [Header("Invaders")]
     public Invader[] prefabs; // = new Invader[4];
 
-    //public AnimationCurve speed = new AnimationCurve();
-    public float speed = 0.3f;
+    public AnimationCurve speed = new AnimationCurve();
+    //public float speed = 0.3f;
     public Vector3 _direction = Vector3.right; //{ get; private set; }
-    /*public Vector3 initialPosition { get; private set; }
-    public System.Action<Invader> killed;
+   // public Vector3 initialPosition { get; private set; }
+   // public System.Action<Invader> killed;
 
     public int AmountKilled { get; private set; }
     public int AmountAlive => TotalAmount - AmountKilled;
-    public int TotalAmount => rows * columns;
+    public int TotalAmount => this.rows * this.columns;
     public float PercentKilled => (float)AmountKilled / (float)TotalAmount;
-    */
+    
     [Header("Grid")]
     public int rows = 4;
     public int columns = 8;
@@ -42,9 +42,8 @@ public class Invaders : MonoBehaviour
             {
                 // Create an invader and parent it to this transform
                 Invader invader = Instantiate(this.prefabs[row], this.transform);
-                /*
-                invader.killed += OnInvaderKilled;
-*/
+                invader.killed += InvaderKilled;
+
                 // Calculate and set the position of the invader in the row
                 Vector3 position = rowPosition;
                 position.x += 0.5f * col;
@@ -87,7 +86,7 @@ public class Invaders : MonoBehaviour
     private void Update()
     {
         // Evaluate the speed of the invaders based on how many have been killed
-        //float speed = this.speed.Evaluate(PercentKilled);
+        float speed = this.speed.Evaluate(this.PercentKilled);
         this.transform.position += _direction * speed * Time.deltaTime;
 
         // Transform the viewport to world coordinates so we can check when the
@@ -130,14 +129,14 @@ public class Invaders : MonoBehaviour
         position.y -= 0.1f;
         this.transform.position = position;
     }
-/*
-    private void OnInvaderKilled(Invader invader)
-    {
-        invader.gameObject.SetActive(false);
-        AmountKilled++;
-        killed(invader);
-    }
 
+    private void InvaderKilled() // Invader invader)
+    {
+        //invader.gameObject.SetActive(false);
+        this.AmountKilled++;
+        //killed(invader);
+    }
+/*
     public void ResetInvaders()
     {
         AmountKilled = 0;
