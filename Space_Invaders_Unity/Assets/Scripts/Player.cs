@@ -12,11 +12,11 @@ public class Player : MonoBehaviour
     {
         Vector3 position = transform.position;
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) 
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || LeftButton.leftPressed) 
         {
             position.x -= speed * Time.deltaTime;
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) 
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || RightButton.rightPressed) 
         {
             position.x += speed * Time.deltaTime;
         }

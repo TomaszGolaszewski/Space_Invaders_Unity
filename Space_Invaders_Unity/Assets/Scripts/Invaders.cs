@@ -17,7 +17,7 @@ public class Invaders : MonoBehaviour
     public int AmountAlive => TotalAmount - AmountKilled;
     public int TotalAmount => this.rows * this.columns;
     public float PercentKilled => (float)AmountKilled / (float)TotalAmount;
-    
+
     [Header("Grid")]
     public int rows = 4;
     public int columns = 8;
@@ -25,7 +25,7 @@ public class Invaders : MonoBehaviour
     [Header("Missiles")]
     public Projectile missilePrefab;
     public float missileSpawnRate = 1f;
-    
+
     private void Awake()
     {
         //initialPosition = transform.position;
@@ -137,9 +137,10 @@ public class Invaders : MonoBehaviour
     {
         //invader.gameObject.SetActive(false);
         this.AmountKilled++;
+        Interface.currentScore++;
         //killed(invader);
 
-        if(this.AmountKilled >= this.TotalAmount)
+        if (this.AmountKilled >= this.TotalAmount)
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             SceneManager.LoadScene(0); //Main Menu
