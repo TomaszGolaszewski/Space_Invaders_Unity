@@ -7,6 +7,13 @@ public class Player : MonoBehaviour
     public Projectile laserPrefab;
     // public System.Action killed;
     private bool _laserActive; // { get; private set; }
+    private float timeOfLastShoot = 0;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        timeOfLastShoot = Time.time - 1f;
+    }
 
     private void Update()
     {
@@ -27,11 +34,16 @@ public class Player : MonoBehaviour
         // Clamp the position of the character so they do not go out of bounds
         position.x = Mathf.Clamp(position.x, leftEdge.x, rightEdge.x);
         transform.position = position;
-
+        /*
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) 
         {
             Shoot();
             //Debug.Log("0");
+        }
+        */
+        if(timeOfLastShoot + 2f < Time.time)
+        {
+            Shoot();
         }
     }
     
@@ -44,6 +56,7 @@ public class Player : MonoBehaviour
             Projectile laser = Instantiate(this.laserPrefab, this.transform.position, Quaternion.identity);
             laser.destroyed += LaserDestroyed;
             _laserActive = true;
+            timeOfLastShoot = Time.time;
         }
         
     }

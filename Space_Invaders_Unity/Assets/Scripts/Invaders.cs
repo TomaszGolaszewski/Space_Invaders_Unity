@@ -24,7 +24,7 @@ public class Invaders : MonoBehaviour
     
     [Header("Missiles")]
     public Projectile missilePrefab;
-    public float missileSpawnRate = 1f;
+    public float missileSpawnRate = 0.25f;
 
     private void Awake()
     {
@@ -48,7 +48,8 @@ public class Invaders : MonoBehaviour
                 // Calculate and set the position of the invader in the row
                 Vector3 position = rowPosition;
                 position.x += 0.5f * col;
-                invader.transform.localPosition = position;              
+                invader.transform.localPosition = position;
+                //invader.timeOfLastShoot = Time.time - Random.value * 5f;
             }
         }
     }
@@ -76,11 +77,15 @@ public class Invaders : MonoBehaviour
                 continue;
             }
 
+            //if () Debug.Log("1");
+
             // Random chance to spawn a missile based upon how many invaders are
             // alive (the more invaders alive the lower the chance)
-            if (Random.value < (1f / (float)this.AmountAlive))
+            if (invader.gameObject.name == "Invader_01(Clone)" && Random.value < (1f / (float)this.AmountAlive))
+            //if (invader.gameObject.name == "Invader_01(Clone)") //&& invader.transform.timeOfLastShoot + 4f < Time.time)
             {
                 Instantiate(this.missilePrefab, invader.position, Quaternion.identity);
+                //invader.timeOfLastShoot = Time.time;
                 break;
             }
         }

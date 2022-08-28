@@ -10,6 +10,8 @@ public class Invader : MonoBehaviour
     //public int score = 10;
     public System.Action killed; // <Invader> killed;
 
+    //public float timeOfLastShoot = 0;
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
