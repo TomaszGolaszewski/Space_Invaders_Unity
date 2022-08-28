@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) 
         {
             Shoot();
-            Debug.Log("0");
+            //Debug.Log("0");
         }
     }
     

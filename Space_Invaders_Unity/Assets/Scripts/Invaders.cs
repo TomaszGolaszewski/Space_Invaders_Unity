@@ -20,11 +20,11 @@ public class Invaders : MonoBehaviour
     [Header("Grid")]
     public int rows = 4;
     public int columns = 8;
-    /*
+    
     [Header("Missiles")]
     public Projectile missilePrefab;
     public float missileSpawnRate = 1f;
-    */
+    
     private void Awake()
     {
         //initialPosition = transform.position;
@@ -51,38 +51,40 @@ public class Invaders : MonoBehaviour
             }
         }
     }
-    /*
+    
     private void Start()
     {
-        InvokeRepeating(nameof(MissileAttack), missileSpawnRate, missileSpawnRate);
+        InvokeRepeating(nameof(MissileAttack), this.missileSpawnRate, this.missileSpawnRate);
     }
 
     private void MissileAttack()
     {
-        int amountAlive = AmountAlive;
+        //int amountAlive = AmountAlive;
 
         // No missiles should spawn when no invaders are alive
-        if (amountAlive == 0) {
+        if (this.AmountAlive == 0) 
+        {
             return;
         }
 
-        foreach (Transform invader in transform)
+        foreach (Transform invader in this.transform)
         {
             // Any invaders that are killed cannot shoot missiles
-            if (!invader.gameObject.activeInHierarchy) {
+            if (!invader.gameObject.activeInHierarchy) 
+            {
                 continue;
             }
 
             // Random chance to spawn a missile based upon how many invaders are
             // alive (the more invaders alive the lower the chance)
-            if (Random.value < (1f / (float)amountAlive))
+            if (Random.value < (1f / (float)this.AmountAlive))
             {
-                Instantiate(missilePrefab, invader.position, Quaternion.identity);
+                Instantiate(this.missilePrefab, invader.position, Quaternion.identity);
                 break;
             }
         }
     }
-    */
+    
     private void Update()
     {
         // Evaluate the speed of the invaders based on how many have been killed

@@ -184,6 +184,8 @@ MonoBehaviour:
   _direction: {x: 1, y: 0, z: 0}
   rows: 4
   columns: 8
+  missilePrefab: {fileID: 3233348754202884295, guid: 17a22f692813c48499bfaac48fe6bdfd, type: 3}
+  missileSpawnRate: 1
 --- !u!4 &813060286
 Transform:
   m_ObjectHideFlags: 0
