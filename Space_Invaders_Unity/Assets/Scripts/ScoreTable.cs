@@ -119,7 +119,7 @@ public class ScoreTable : MonoBehaviour
         transformList.Add(entryTransform);
     }
 
-    private void AddNewEntry(int score, string name)
+    public void AddNewEntry(int score, string name)
     {
         // Create new score entry
         ScoreEntry newscoreEntry = new ScoreEntry { score = score, name = name };
