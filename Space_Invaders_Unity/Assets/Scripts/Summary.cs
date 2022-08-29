@@ -9,9 +9,11 @@ public class Summary : MonoBehaviour
     public TextMeshProUGUI Last_pos;
     public TextMeshProUGUI Last_score;
 
+    private string newName;
+
     public void BackButton()
     {
-        AddNewEntry(Interface.currentScore, "TE3");
+        AddNewEntry(Interface.currentScore, this.newName);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.LoadScene(0); // Main menu
     }
@@ -27,7 +29,7 @@ public class Summary : MonoBehaviour
         {
             if (Interface.currentScore > highscores.scoreEntryList[i].score)
             {
-                Last_pos.text = i.ToString();
+                Last_pos.text = (i + 1).ToString();
                 break;
             }
             else
@@ -37,6 +39,12 @@ public class Summary : MonoBehaviour
         }
 
         Last_score.text = Interface.currentScore.ToString();
+    }
+
+    public void ReadStringInput(string newString)
+    {
+        // .Substring(start, length);
+        this.newName = newString.Substring(0, 3);
     }
 
     // Copied from ScoreTable
