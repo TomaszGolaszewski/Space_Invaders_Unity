@@ -148,7 +148,8 @@ public class Invaders : MonoBehaviour
         if (this.AmountKilled >= this.TotalAmount)
         {
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            SceneManager.LoadScene(0); //Main Menu
+            //SceneManager.LoadScene(0); //Main Menu
+            SceneManager.LoadScene(2); //Summary
         }
     }
 /*

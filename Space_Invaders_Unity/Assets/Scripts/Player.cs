@@ -71,7 +71,8 @@ public class Player : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Missile") ||
             other.gameObject.layer == LayerMask.NameToLayer("Invader"))
         {
-            SceneManager.LoadScene(0); //Main Menu
+            //SceneManager.LoadScene(0); //Main Menu
+            SceneManager.LoadScene(2); //Summary
             /*if (killed != null) {
                 killed.Invoke();
             }*/
