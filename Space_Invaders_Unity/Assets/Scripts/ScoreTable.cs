@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class ScoreTable : MonoBehaviour
@@ -13,9 +14,14 @@ public class ScoreTable : MonoBehaviour
 
     public TextMeshProUGUI Games_count;
 
+    //public GameObject Main_Menu;
+    //private GameObject ScoreTableScene;
+
     // Init of the high score table, reading data
     private void Awake()
     {
+        //ScoreTableScene = GameObject.Find("ScoreTable");
+
         entryContainer = transform.Find("ScoreEntryContainer");
         entryTemplate = entryContainer.Find("ScoreEntryTemplate");
 
@@ -32,7 +38,7 @@ public class ScoreTable : MonoBehaviour
         }
 
         // Add 1 to counter
-        highscores.gamesCounter++;
+        //highscores.gamesCounter++;
         // Print no of games
         Games_count.text = highscores.gamesCounter.ToString();
 
@@ -76,7 +82,31 @@ public class ScoreTable : MonoBehaviour
 
         transformList.Add(entryTransform);
     }
-  
+
+    public void ResetButton()
+    {
+        // Create new score entry and list with highscores
+        scoreEntryList = new List<ScoreEntry>()
+        {
+            new ScoreEntry{ score = 1, name = "TOM" },
+        };
+
+        // Create new highscores container
+        Highscores highscores = new Highscores { scoreEntryList = scoreEntryList, gamesCounter = 0 };
+
+        // Save data
+        string json = JsonUtility.ToJson(highscores);
+        PlayerPrefs.SetString("scoreTable", json);
+        PlayerPrefs.Save();
+
+
+
+        SceneManager.LoadScene(0);
+        //Main Menu.gameObject.SetActive(false); //Find("Main Menu").
+        //Main_Menu.Find("Main Menu").GetComponent<GameObject>().SetActive(false);
+        //ScoreTableScene.GetComponent<GameObject>().SetActive(true); //.enabled = true; //<Renderer>
+    }
+
     // Class to store all statistics data
     private class Highscores
     {

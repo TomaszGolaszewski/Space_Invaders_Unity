@@ -18,15 +18,18 @@ public class Player : MonoBehaviour
     {
         Vector3 position = transform.position;
 
+        // Move left
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) || LeftButton.leftPressed) 
         {
             position.x -= speed * Time.deltaTime;
         }
+        // Move right
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || RightButton.rightPressed) 
         {
             position.x += speed * Time.deltaTime;
         }
 
+        // Check edges
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
         Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
 
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
         position.x = Mathf.Clamp(position.x, leftEdge.x, rightEdge.x);
         transform.position = position;
 
+        // Shot one laser per 2s
         if(timeOfLastShoot + 2f < Time.time)
         {
             Shoot();
@@ -53,7 +57,7 @@ public class Player : MonoBehaviour
         }   
     }
 
-    private void LaserDestroyed() // Projectile laser)
+    private void LaserDestroyed()
     {
         _laserActive = false;
     }

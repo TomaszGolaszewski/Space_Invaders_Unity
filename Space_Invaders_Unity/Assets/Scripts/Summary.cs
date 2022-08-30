@@ -77,6 +77,9 @@ public class Summary : MonoBehaviour
             highscores.scoreEntryList.RemoveAt(10);
         }
 
+        // Add 1 to counter
+        highscores.gamesCounter++;
+
         // Save updated highscores
         string json = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("scoreTable", json);
