@@ -14,14 +14,9 @@ public class ScoreTable : MonoBehaviour
 
     public TextMeshProUGUI Games_count;
 
-    //public GameObject Main_Menu;
-    //private GameObject ScoreTableScene;
-
     // Init of the high score table, reading data
     private void Awake()
     {
-        //ScoreTableScene = GameObject.Find("ScoreTable");
-
         entryContainer = transform.Find("ScoreEntryContainer");
         entryTemplate = entryContainer.Find("ScoreEntryTemplate");
 
@@ -37,8 +32,6 @@ public class ScoreTable : MonoBehaviour
             CreateScoreEntryTransform(scoreEntry, entryContainer, scoreEntryTransformList);
         }
 
-        // Add 1 to counter
-        //highscores.gamesCounter++;
         // Print no of games
         Games_count.text = highscores.gamesCounter.ToString();
 
@@ -99,12 +92,8 @@ public class ScoreTable : MonoBehaviour
         PlayerPrefs.SetString("scoreTable", json);
         PlayerPrefs.Save();
 
-
-
+        // Jump to Main Menu
         SceneManager.LoadScene(0);
-        //Main Menu.gameObject.SetActive(false); //Find("Main Menu").
-        //Main_Menu.Find("Main Menu").GetComponent<GameObject>().SetActive(false);
-        //ScoreTableScene.GetComponent<GameObject>().SetActive(true); //.enabled = true; //<Renderer>
     }
 
     // Class to store all statistics data

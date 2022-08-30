@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Invader : MonoBehaviour
@@ -32,13 +33,19 @@ public class Invader : MonoBehaviour
 
         _spriteRenderer.sprite = this.animationSprites[_animationFrame];
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Laser")) 
+        // When Invader is killed
+        if (other.gameObject.layer == LayerMask.NameToLayer("Laser"))
         {
             this.killed.Invoke();
-            this.gameObject.SetActive(false);       
+            this.gameObject.SetActive(false);
+        }
+        // When Invader reaches player's field
+        if (other.gameObject.layer == LayerMask.NameToLayer("Boundary"))
+        {
+            SceneManager.LoadScene(2);
         }
     }
 }
