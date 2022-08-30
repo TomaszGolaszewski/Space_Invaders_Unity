@@ -3,15 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class Invaders : MonoBehaviour
 {
-
     [Header("Invaders")]
-    public Invader[] prefabs; // = new Invader[4];
+    public Invader[] prefabs;
 
     public AnimationCurve speed = new AnimationCurve();
-    //public float speed = 0.3f;
-    public Vector3 _direction = Vector3.right; //{ get; private set; }
-   // public Vector3 initialPosition { get; private set; }
-   // public System.Action<Invader> killed;
+    public Vector3 _direction = Vector3.right;
 
     public int AmountKilled { get; private set; }
     public int AmountAlive => TotalAmount - AmountKilled;
@@ -28,8 +24,6 @@ public class Invaders : MonoBehaviour
 
     private void Awake()
     {
-        //initialPosition = transform.position;
-
         // Form the grid of invaders
         for (int row = 0; row < this.rows; row++)
         {
@@ -49,7 +43,6 @@ public class Invaders : MonoBehaviour
                 Vector3 position = rowPosition;
                 position.x += 0.5f * col;
                 invader.transform.localPosition = position;
-                //invader.timeOfLastShoot = Time.time - Random.value * 5f;
             }
         }
     }
@@ -61,8 +54,6 @@ public class Invaders : MonoBehaviour
 
     private void MissileAttack()
     {
-        //int amountAlive = AmountAlive;
-
         // No missiles should spawn when no invaders are alive
         if (this.AmountAlive == 0) 
         {
@@ -77,15 +68,11 @@ public class Invaders : MonoBehaviour
                 continue;
             }
 
-            //if () Debug.Log("1");
-
             // Random chance to spawn a missile based upon how many invaders are
             // alive (the more invaders alive the lower the chance)
             if (invader.gameObject.name == "Invader_01(Clone)" && Random.value < (1f / (float)this.AmountAlive))
-            //if (invader.gameObject.name == "Invader_01(Clone)") //&& invader.transform.timeOfLastShoot + 4f < Time.time)
             {
                 Instantiate(this.missilePrefab, invader.position, Quaternion.identity);
-                //invader.timeOfLastShoot = Time.time;
                 break;
             }
         }
@@ -102,8 +89,7 @@ public class Invaders : MonoBehaviour
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
         Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
 
-        // The invaders will advance to the next row after reaching the edge of
-        // the screen
+        // The invaders will advance to the next row after reaching the edge of the screen
         foreach (Transform invader in this.transform)
         {
             // Skip any invaders that have been killed
@@ -129,7 +115,6 @@ public class Invaders : MonoBehaviour
     private void AdvanceRow()
     {
         // Flip the direction the invaders are moving
-        //_direction = new Vector3(-_direction.x, 0f, 0f);
         _direction *= -1.0f;
 
         // Move the entire grid of invaders down a row
@@ -138,30 +123,15 @@ public class Invaders : MonoBehaviour
         this.transform.position = position;
     }
 
-    private void InvaderKilled() // Invader invader)
+    private void InvaderKilled()
     {
-        //invader.gameObject.SetActive(false);
         this.AmountKilled++;
         Interface.currentScore++;
-        //killed(invader);
 
+        // When all invaders are killed go to Summary scene
         if (this.AmountKilled >= this.TotalAmount)
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            //SceneManager.LoadScene(0); //Main Menu
             SceneManager.LoadScene(2); //Summary
         }
     }
-/*
-    public void ResetInvaders()
-    {
-        AmountKilled = 0;
-        direction = Vector3.right;
-        transform.position = initialPosition;
-
-        foreach (Transform invader in transform) {
-            invader.gameObject.SetActive(true);
-        }
-    }
-    */
 }

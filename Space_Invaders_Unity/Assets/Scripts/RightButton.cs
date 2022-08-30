@@ -13,11 +13,13 @@ public class RightButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         rightPressed = false;
     }
 
+    // Button pressed
     public void OnPointerDown(PointerEventData eventData)
     {
         rightPressed = true;
     }
 
+    // Button released
     public void OnPointerUp(PointerEventData eventData)
     {
         rightPressed = false;

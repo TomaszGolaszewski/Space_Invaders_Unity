@@ -13,11 +13,13 @@ public class LeftButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         leftPressed = false;
     }
 
+    // Button pressed
     public void OnPointerDown(PointerEventData eventData)
     {
         leftPressed = true;
     }
 
+    // Button released
     public void OnPointerUp(PointerEventData eventData)
     {
         leftPressed = false;

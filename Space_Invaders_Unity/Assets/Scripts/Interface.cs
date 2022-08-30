@@ -8,7 +8,7 @@ using TMPro;
 public class Interface : MonoBehaviour
 {
     public TextMeshProUGUI Score;
-    public static int currentScore; // { get; private set; } = 0;
+    public static int currentScore;
 
     // Start is called before the first frame update
     void Start()

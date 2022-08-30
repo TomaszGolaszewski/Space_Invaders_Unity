@@ -14,7 +14,6 @@ public class Summary : MonoBehaviour
     public void BackButton()
     {
         AddNewEntry(Interface.currentScore, this.newName);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.LoadScene(0); // Main menu
     }
     
@@ -43,11 +42,11 @@ public class Summary : MonoBehaviour
 
     public void ReadStringInput(string newString)
     {
-        // .Substring(start, length);
+        // Take 3 first letters from string - .Substring(start, length);
         this.newName = newString.Substring(0, 3);
     }
 
-    // Copied from ScoreTable
+    // Add new entry to score table
     public void AddNewEntry(int score, string name)
     {
         // Create new score entry

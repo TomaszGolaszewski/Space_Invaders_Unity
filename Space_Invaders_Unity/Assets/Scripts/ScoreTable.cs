@@ -21,42 +21,9 @@ public class ScoreTable : MonoBehaviour
 
         entryTemplate.gameObject.SetActive(false);
 
-        /*
-        scoreEntryList = new List<ScoreEntry>()
-        { 
-            new ScoreEntry{ score = 1, name = "AA1" },
-            new ScoreEntry{ score = 2, name = "AA2" },
-            new ScoreEntry{ score = 3, name = "AA3" },
-            new ScoreEntry{ score = 20, name = "A20" },
-            new ScoreEntry{ score = 5, name = "AA5" },
-            new ScoreEntry{ score = 6, name = "AA6" },
-            new ScoreEntry{ score = 7, name = "AA7" },
-            new ScoreEntry{ score = 8, name = "AA8" },
-        };
-        */
-
-        //AddNewEntry(13, "TO2");
-
         // Read saves
         string jsonString = PlayerPrefs.GetString("scoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
-
-        /*
-        // Sort entry list by Score
-        for (int i = 0; i < highscores.scoreEntryList.Count; i++)
-        {
-            for (int j = i + 1; j < highscores.scoreEntryList.Count; j++)
-            {
-                if(highscores.scoreEntryList[j].score > highscores.scoreEntryList[i].score)
-                {
-                    //Swap
-                    ScoreEntry tmp = highscores.scoreEntryList[i];
-                    highscores.scoreEntryList[i] = highscores.scoreEntryList[j];
-                    highscores.scoreEntryList[j] = tmp;
-                }
-            } 
-        }
-        */
 
         scoreEntryTransformList = new List<Transform>();
         foreach (ScoreEntry scoreEntry in highscores.scoreEntryList)
@@ -64,23 +31,15 @@ public class ScoreTable : MonoBehaviour
             CreateScoreEntryTransform(scoreEntry, entryContainer, scoreEntryTransformList);
         }
 
-
-        //int gamesCounter = Random.Range(0, 10000);
-        //int gamesCounter = 0;
-        // add 1 to counter
+        // Add 1 to counter
         highscores.gamesCounter++;
         // Print no of games
         Games_count.text = highscores.gamesCounter.ToString();
 
-        //PlayerPrefs.SetInt("Games_count", number);
-        
-        //Highscores highscores = new Highscores { scoreEntryList = scoreEntryList, gamesCounter = 0 };
-        //highscores.gamesCounter = 0;
         // Save data
         string json = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("scoreTable", json);
         PlayerPrefs.Save();
-        //Debug.Log(PlayerPrefs.GetString("scoreTable"));
     }
 
     // Method drawing one row of high score table
@@ -105,8 +64,7 @@ public class ScoreTable : MonoBehaviour
             case 2: rankString = "2ND"; break;
             case 3: rankString = "3RD"; break;
         }
-        entryTransform.Find("Text_Pos").GetComponent<TextMeshProUGUI>().text = rankString;
-        // entryTransform.Find("Text_test").GetComponent<Text>().text = rankString;    
+        entryTransform.Find("Text_Pos").GetComponent<TextMeshProUGUI>().text = rankString;   
 
         // Print score
         int score = scoreEntry.score;
@@ -118,43 +76,7 @@ public class ScoreTable : MonoBehaviour
 
         transformList.Add(entryTransform);
     }
-
-    public void AddNewEntry(int score, string name)
-    {
-        // Create new score entry
-        ScoreEntry newscoreEntry = new ScoreEntry { score = score, name = name };
-
-        // Read saves
-        string jsonString = PlayerPrefs.GetString("scoreTable");
-        Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
-
-        // Add new entry do highscores
-        highscores.scoreEntryList.Add(newscoreEntry);
-
-        // Sort entry list by Score
-        for (int i = highscores.scoreEntryList.Count - 1; i > 0 ; i--)
-        {
-            if (highscores.scoreEntryList[i].score > highscores.scoreEntryList[i-1].score)
-            {
-                //Swap
-                ScoreEntry tmp = highscores.scoreEntryList[i];
-                highscores.scoreEntryList[i] = highscores.scoreEntryList[i-1];
-                highscores.scoreEntryList[i-1] = tmp;
-            }
-        }
-
-        // Remove 11th entry
-        if(highscores.scoreEntryList.Count > 10)
-        {
-            highscores.scoreEntryList.RemoveAt(10);
-        }
-
-        // Save updated highscores
-        string json = JsonUtility.ToJson(highscores);
-        PlayerPrefs.SetString("scoreTable", json);
-        PlayerPrefs.Save();
-    }
-
+  
     // Class to store all statistics data
     private class Highscores
     {

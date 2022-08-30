@@ -3,23 +3,20 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Invader : MonoBehaviour
 {
-    public SpriteRenderer _spriteRenderer;// { get; private set; }
-    public Sprite[] animationSprites;// = new Sprite[0];
+    public SpriteRenderer _spriteRenderer;
+    public Sprite[] animationSprites;
     public float animationTime = 1f;
-    public int _animationFrame;// { get; private set; }
-    //public int score = 10;
-    public System.Action killed; // <Invader> killed;
-
-    //public float timeOfLastShoot = 0;
+    public int _animationFrame;
+    public System.Action killed;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        //spriteRenderer.sprite = animationSprites[0];
     }
 
     private void Start()
     {
+        // Invoke animation
         InvokeRepeating(nameof(AnimateSprite), this.animationTime, this.animationTime);
     }
 

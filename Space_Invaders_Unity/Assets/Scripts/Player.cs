@@ -5,8 +5,7 @@ public class Player : MonoBehaviour
 {
     public float speed = 5f;
     public Projectile laserPrefab;
-    // public System.Action killed;
-    private bool _laserActive; // { get; private set; }
+    private bool _laserActive;
     private float timeOfLastShoot = 0;
 
     // Start is called before the first frame update
@@ -34,13 +33,7 @@ public class Player : MonoBehaviour
         // Clamp the position of the character so they do not go out of bounds
         position.x = Mathf.Clamp(position.x, leftEdge.x, rightEdge.x);
         transform.position = position;
-        /*
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) 
-        {
-            Shoot();
-            //Debug.Log("0");
-        }
-        */
+
         if(timeOfLastShoot + 2f < Time.time)
         {
             Shoot();
@@ -57,8 +50,7 @@ public class Player : MonoBehaviour
             laser.destroyed += LaserDestroyed;
             _laserActive = true;
             timeOfLastShoot = Time.time;
-        }
-        
+        }   
     }
 
     private void LaserDestroyed() // Projectile laser)
@@ -68,15 +60,18 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Missile") ||
-            other.gameObject.layer == LayerMask.NameToLayer("Invader"))
+        // Collision with Invaders - go to Summary scene
+        if (other.gameObject.layer == LayerMask.NameToLayer("Invader"))
         {
-            //SceneManager.LoadScene(0); //Main Menu
             SceneManager.LoadScene(2); //Summary
-            /*if (killed != null) {
-                killed.Invoke();
-            }*/
         }
-    }
-    
+
+        // Collision with Invader' missile - subtract score
+        if (other.gameObject.layer == LayerMask.NameToLayer("Missile"))
+        {
+            //SceneManager.LoadScene(2); //Summary
+            Interface.currentScore -= 4;
+            if (Interface.currentScore < 0) Interface.currentScore = 0;
+        }
+    }  
 }
